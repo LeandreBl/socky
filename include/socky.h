@@ -82,7 +82,7 @@ struct socky {
 int socky_create(struct socky *socky, enum socky_protocol protocol) __nonnull((1));
 
 /**
- * \fn int socky_set_listen_mode(struct socky *socky, size_t waiting_list_size)
+ * \fn int socky_start_listening(struct socky *socky, size_t waiting_list_size)
  * 
  * \brief Set the socket to listen mode.
  * 
@@ -92,7 +92,7 @@ int socky_create(struct socky *socky, enum socky_protocol protocol) __nonnull((1
  * 
  * \return 0 on success, -1 on error, errno is set accordingly.
  */
-int socky_set_listen_mode(struct socky *socky, uint16_t port, size_t waiting_list_size) __nonnull((1));
+int socky_start_listening(struct socky *socky, uint16_t port, size_t waiting_list_size) __nonnull((1));
 
 /**
  * \fn int socky_get_port(const struct socky *socky, uint16_t *pport)
@@ -112,7 +112,7 @@ int socky_get_port(const struct socky *socky, uint16_t *pport) __nonnull((1, 2))
  * \brief Get the address of the socket as a string.
  * 
  * \param socky The socket to get the address from.
- * \param pstr The address of the string variable to fill.
+ * \param pstr The address of the string variable to fill, this pointer needs to be freed.
  * 
  * \return 0 on success, -1 on error, errno is set accordingly.
  */
@@ -226,6 +226,21 @@ ssize_t socky_read(const struct socky *socky, void *data, size_t size) __nonnull
 ssize_t socky_recv(const struct socky *socky, void *data, size_t size, int flags) __nonnull((1, 2));
 
 /**
+ * \enum socky_shutdown_mode
+ * 
+ * \brief The shutdown mode of a socket.
+ * 
+ * \var SOCKY_SHUTDOWN_READ, shutdown the reading endpoint of a socket
+ * \var SOCKY_SHUTDOWN_WRITE, shutdown the writing endpoint of a socket
+ * \var SOCKY_SHUTDOWN_READ_WRITE, shutdown both endpoints of a socket
+ */
+enum socky_shutdown_mode {
+    SOCKY_SHUTDOWN_READ = SHUT_RD,
+    SOCKY_SHUTDOWN_WRITE = SHUT_WR,
+    SOCKY_SHUTDOWN_READ_WRITE = SHUT_RDWR
+};
+
+/**
  * \fn int socky_shutdown(const struct socky *socky, int how)
  * 
  * \brief Shutdown a socket.
@@ -235,7 +250,7 @@ ssize_t socky_recv(const struct socky *socky, void *data, size_t size, int flags
  * 
  * \return 0 on success, -1 on error, errno is set accordingly.
  */
-int socky_shutdown(struct socky *socky, int how) __nonnull((1));
+int socky_shutdown(struct socky *socky, enum socky_shutdown_mode how) __nonnull((1));
 
 /**
  * \fn int socky_destroy(struct socky *socky)

@@ -5,6 +5,14 @@ CC			= gcc
 ARCHIVER	= ar
 
 SRCS		= src/create.c
+SRCS		+= src/destroy.c
+SRCS		+= src/shutdown.c
+SRCS		+= src/start_listening.c
+SRCS		+= src/get_port.c
+SRCS 		+= src/get_address_str.c
+SRCS 		+= src/get_address.c
+SRCS		+= src/connect.c
+SRCS		+= src/connect_from_string.c
 
 TESTS_SRCS	:= $(SRCS)
 TESTS_SRCS	+= tests/create_tests.c
