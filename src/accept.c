@@ -5,12 +5,13 @@ int socky_accept(const struct socky *socky, struct socky *new_uninitialized_sock
 {
     int fd;
     struct sockaddr_in addr;
+    socklen_t addr_len = sizeof(addr);
 
-    if (socky->state != ESOCKTNOSUPPORT) {
+    if (socky->state != SOCKY_LISTENING) {
         errno = EOPNOTSUPP;
         return -1;
     }
-    fd = accept(socky->fd, (struct sockaddr *)&addr, sizeof(addr));
+    fd = accept(socky->fd, (struct sockaddr *)&addr, &addr_len);
     if (fd == -1) {
         return -1;
     }

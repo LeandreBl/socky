@@ -7,15 +7,34 @@ ARCHIVER	= ar
 SRCS		= src/create.c
 SRCS		+= src/destroy.c
 SRCS		+= src/shutdown.c
-SRCS		+= src/start_listening.c
+SRCS		+= src/listen.c
 SRCS		+= src/get_port.c
 SRCS 		+= src/get_address_str.c
 SRCS 		+= src/get_address.c
+SRCS		+= src/accept.c
 SRCS		+= src/connect.c
 SRCS		+= src/connect_from_string.c
+SRCS		+= src/write.c
+SRCS		+= src/send.c
+SRCS		+= src/read.c
+SRCS		+= src/recv.c
+
 
 TESTS_SRCS	:= $(SRCS)
 TESTS_SRCS	+= tests/create_tests.c
+TESTS_SRCS	+= tests/destroy_tests.c
+TESTS_SRCS	+= tests/shutdown_tests.c
+TESTS_SRCS	+= tests/listen_tests.c
+TESTS_SRCS	+= tests/get_port_tests.c
+TESTS_SRCS	+= tests/get_address_str_tests.c
+TESTS_SRCS	+= tests/get_address_tests.c
+TESTS_SRCS	+= tests/accept_tests.c
+TESTS_SRCS	+= tests/connect_tests.c
+TESTS_SRCS	+= tests/connect_from_string_tests.c
+TESTS_SRCS	+= tests/write_tests.c
+TESTS_SRCS	+= tests/send_tests.c
+TESTS_SRCS	+= tests/read_tests.c
+TESTS_SRCS	+= tests/recv_tests.c
 
 OBJS		= $(SRCS:.c=.o)
 TESTS_OBJS	= $(TESTS_SRCS:.c=.o)
@@ -42,6 +61,7 @@ $(NAME): $(OBJS)
 	["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
 
 tests_run: $(TESTS_OBJS)
+	@echo $(TESTS_OBJS)
 	@$ $(CC) -lcriterion $(TESTS_OBJS) $(LIBS) -o $@
 	@echo "$(CC) -lcriterion $(TESTS_OBJS) $(LIBS) -o $@ \
 	["$(GREEN)"LINKING OK"$(NO_COLOR)"]"

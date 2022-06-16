@@ -3,7 +3,7 @@
 
 int socky_get_address(const struct socky *socky, uint32_t *paddr)
 {
-    if (socky->state != SOCKY_CONNECTED && socky->state != SOCKY_LISTENING) {
+    if (socky->state != SOCKY_CONNECTED) {
         errno = ENOTCONN;
         return -1;
     }

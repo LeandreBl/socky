@@ -7,7 +7,7 @@ int socky_get_address_str(const struct socky *socky, char **pstr)
 {
     const char *s;
 
-    if (socky->state != SOCKY_CONNECTED && socky->state != SOCKY_LISTENING) {
+    if (socky->state != SOCKY_CONNECTED) {
         errno = ENOTCONN;
         return -1;
     }

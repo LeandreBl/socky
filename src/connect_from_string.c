@@ -17,5 +17,5 @@ int socky_connect_from_string(struct socky *socky, const char *address_as_string
 		return -1;
     }
 	ip_addr = ((struct in_addr *)info->h_addr)->s_addr;
-    return socky_connect(socky, ip_addr, port);
+    return socky_connect(socky, htonl(ip_addr), port);
 }

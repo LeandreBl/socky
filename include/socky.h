@@ -82,7 +82,7 @@ struct socky {
 int socky_create(struct socky *socky, enum socky_protocol protocol) __nonnull((1));
 
 /**
- * \fn int socky_start_listening(struct socky *socky, size_t waiting_list_size)
+ * \fn int socky_listen(struct socky *socky, size_t waiting_list_size)
  * 
  * \brief Set the socket to listen mode.
  * 
@@ -92,7 +92,7 @@ int socky_create(struct socky *socky, enum socky_protocol protocol) __nonnull((1
  * 
  * \return 0 on success, -1 on error, errno is set accordingly.
  */
-int socky_start_listening(struct socky *socky, uint16_t port, size_t waiting_list_size) __nonnull((1));
+int socky_listen(struct socky *socky, uint16_t port, size_t waiting_list_size) __nonnull((1));
 
 /**
  * \fn int socky_get_port(const struct socky *socky, uint16_t *pport)
