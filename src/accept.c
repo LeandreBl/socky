@@ -11,6 +11,10 @@ int socky_accept(const struct socky *socky, struct socky *new_uninitialized_sock
         errno = EOPNOTSUPP;
         return -1;
     }
+    if (socky->proto != SOCKY_TCP) {
+        errno = EPROTONOSUPPORT;
+        return -1;
+    }
     fd = accept(socky->fd, (struct sockaddr *)&addr, &addr_len);
     if (fd == -1) {
         return -1;

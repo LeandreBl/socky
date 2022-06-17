@@ -10,10 +10,6 @@ int socky_listen(struct socky *socky, uint16_t port, size_t waiting_list_size)
         errno = EBUSY;
         return -1;
     }
-    if (socky->proto != SOCKY_TCP) {
-        errno = EOPNOTSUPP;
-        return -1;
-    }
     socky->addr.sin_family = AF_INET;
     socky->addr.sin_port = htons(port);
     socky->addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -23,7 +19,7 @@ int socky_listen(struct socky *socky, uint16_t port, size_t waiting_list_size)
     if (port == 0 && getsockname(socky->fd, (struct sockaddr *)&socky->addr, &len) == -1) {
         return -1;
     }
-    if (listen(socky->fd, waiting_list_size) == -1) {
+    if (socky->proto == SOCKY_TCP && listen(socky->fd, waiting_list_size) == -1) {
         return -1;
     }
     socky->state = SOCKY_LISTENING;

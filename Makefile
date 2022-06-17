@@ -66,6 +66,8 @@ tests_run: $(TESTS_OBJS)
 	@echo "$(CC) -lcriterion $(TESTS_OBJS) $(LIBS) -o $@ \
 	["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
 	./$@
+	@pkill nc || true
+	@pkill $@ || true
 	@$(RM) $@
 	@$(RM) $(TESTS_OBJS)
 
@@ -75,6 +77,8 @@ val_run: $(TESTS_OBJS)
 	@echo "$(CC) -lcriterion $(TESTS_OBJS) $(LIBS) -o $@ \
 	["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
 	valgrind --trace-children=yes --quiet ./$@
+	@pkill nc || true
+	@pkill $@ || true
 	@$(RM) $@
 	@$(RM) $(TESTS_OBJS)
 

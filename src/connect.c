@@ -13,7 +13,7 @@ int socky_connect(struct socky *socky, uint32_t address, uint16_t port)
     if (connect(socky->fd, (struct sockaddr *)&socky->addr, sizeof(socky->addr)) == -1) {
         return -1;
     }
-    socky->proto = SOCKY_DUPLEX;
+    socky->type = SOCKY_DUPLEX;
     socky->state = SOCKY_CONNECTED;
     return 0;
 }
