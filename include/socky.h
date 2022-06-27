@@ -82,6 +82,20 @@ struct socky {
 int socky_create(struct socky *socky, enum socky_protocol protocol) __nonnull((1));
 
 /**
+ * \fn int socky_set_options(struct socky *socky, int options)
+ * 
+ * \brief Set the options of the socket.
+ * 
+ * \note This function is a wrapper around setsockopt.
+ * 
+ * \param socky The socket to set the options of.
+ * \param options The options to set (see man 7 socket).
+ * 
+ * \return 0 on success, -1 on error, errno is set accordingly.
+ */
+int socky_set_options(struct socky *socky, int options) __nonnull((1));
+
+/**
  * \fn int socky_listen(struct socky *socky, size_t waiting_list_size)
  * 
  * \brief Set the socket to listen mode.

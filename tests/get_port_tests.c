@@ -31,7 +31,7 @@ Test(socky, client_get_port_udp)
     uint16_t local_port = 0;
 
     srand(time(NULL));
-    server_port = rand() % 8000 + 8000;
+    server_port = rand() % 1000 + 7000;
     cr_log_warn("Connecting (UDP) to %18s:%5d\n", addr, server_port);
     cr_assert(socky_create(&client, SOCKY_UDP) == 0);
     cr_assert(socky_connect_from_string(&client, addr, server_port) == 0);

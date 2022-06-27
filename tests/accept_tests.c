@@ -18,7 +18,7 @@ Test(socky, accept_with_netcat)
     const char *addr = "127.0.0.1";
 
     srand(time(NULL));
-    port = rand() % 3000 + 3000;
+    port = rand() % 1000 + 1000;
     cr_log_warn("Accepting  (TCP) from %16s:%5d\n", addr, port);
     if (asprintf(&cmd, "sleep 2 && nc %s %d&", addr, port) == -1) {
         cr_log_error("Can't allocate memory for netcat command\n");
@@ -49,7 +49,7 @@ Test(accept, accept_with_netcat_udp)
     const char *addr = "127.0.0.1";
 
     srand(time(NULL));
-    port = rand() % 2000 + 12000;
+    port = rand() % 1000 + 2000;
     cr_log_warn("Accepting  (UDP) from %16s:%5d\n", addr, port);
     if (asprintf(&cmd, "sleep 2 && nc -u %s %d&", addr, port) == -1) {
         cr_log_error("Can't allocate memory for netcat command\n");

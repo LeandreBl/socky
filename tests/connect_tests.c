@@ -17,7 +17,7 @@ Test(socky, connect_with_netcat)
     const char *addr = "127.0.0.1";
 
     srand(time(NULL));
-    port = rand() % 6000 + 6000;
+    port = rand() % 1000 + 5000;
     cr_log_warn("Connecting (TCP) to %18s:%5d\n", addr, port);
     if (asprintf(&cmd, "nc -l -p %d&", port) == -1) {
         cr_log_error("Can't allocate memory for netcat command\n");
@@ -48,7 +48,7 @@ Test(socky, connecting_with_netcat_udp)
     const char *addr = "127.0.0.1";
 
     srand(time(NULL));
-    port = rand() % 8000 + 8000;
+    port = rand() % 1000 + 6000;
     cr_log_warn("Connecting (UDP) to %18s:%5d\n", addr, port);
     if (asprintf(&cmd, "nc -u -l -p %d&", port) == -1) {
         cr_log_error("Can't allocate memory for netcat command\n");

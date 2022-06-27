@@ -18,12 +18,12 @@ SRCS		+= src/write.c
 SRCS		+= src/send.c
 SRCS		+= src/read.c
 SRCS		+= src/recv.c
+SRCS		+= src/set_options.c
 
 
 TESTS_SRCS	:= $(SRCS)
 TESTS_SRCS	+= tests/create_tests.c
 TESTS_SRCS	+= tests/destroy_tests.c
-TESTS_SRCS	+= tests/shutdown_tests.c
 TESTS_SRCS	+= tests/listen_tests.c
 TESTS_SRCS	+= tests/get_port_tests.c
 TESTS_SRCS	+= tests/get_address_str_tests.c

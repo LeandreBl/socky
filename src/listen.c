@@ -19,9 +19,13 @@ int socky_listen(struct socky *socky, uint16_t port, size_t waiting_list_size)
     if (port == 0 && getsockname(socky->fd, (struct sockaddr *)&socky->addr, &len) == -1) {
         return -1;
     }
-    if (socky->proto == SOCKY_TCP && listen(socky->fd, waiting_list_size) == -1) {
-        return -1;
+    if (socky->proto == SOCKY_TCP) {
+        if (listen(socky->fd, waiting_list_size) == -1) {
+            return -1;
+        }
+        socky->state = SOCKY_LISTENING;
+    } else {
+        socky->state = SOCKY_DUPLEX;
     }
-    socky->state = SOCKY_LISTENING;
     return 0;
 }
