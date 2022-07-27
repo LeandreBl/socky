@@ -224,7 +224,7 @@ ssize_t socky_send(const struct socky *socky, const void *data, size_t size, int
  * 
  * \return The number of bytes read on success, -1 on error, errno is set accordingly.
  */
-ssize_t socky_read(const struct socky *socky, void *data, size_t size) __nonnull((1, 2));
+ssize_t socky_read(struct socky *socky, void *data, size_t size) __nonnull((1, 2));
 
 /**
  * \fn ssize_t socky_recv(const struct socky *socky, void *data, size_t size, int flags)
@@ -237,7 +237,7 @@ ssize_t socky_read(const struct socky *socky, void *data, size_t size) __nonnull
  * 
  * \return The number of bytes received on success, -1 on error, errno is set accordingly.
  */
-ssize_t socky_recv(const struct socky *socky, void *data, size_t size, int flags) __nonnull((1, 2));
+ssize_t socky_recv(struct socky *socky, void *data, size_t size, int flags) __nonnull((1, 2));
 
 /**
  * \enum socky_shutdown_mode

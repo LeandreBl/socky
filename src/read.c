@@ -1,8 +1,10 @@
 #include <errno.h>
 #include "socky.h"
 
-ssize_t socky_read(const struct socky *socky, void *data, size_t size)
+ssize_t socky_read(struct socky *socky, void *data, size_t size)
 {
+    ssize_t rd;
+
     if (socky->state != SOCKY_CONNECTED) {
         errno = ENOTCONN;
         return -1;
@@ -11,5 +13,9 @@ ssize_t socky_read(const struct socky *socky, void *data, size_t size)
         errno = ESOCKTNOSUPPORT;
         return -1;
     }
-    return recv(socky->fd, data, size, 0);
+    rd = recv(socky->fd, data, size, 0);
+    if (rd == 0) {
+        socky_destroy(socky);
+    }
+    return rd;
 }
