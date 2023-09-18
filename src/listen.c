@@ -24,8 +24,10 @@ int socky_listen(struct socky *socky, uint16_t port, size_t waiting_list_size)
             return -1;
         }
         socky->state = SOCKY_LISTENING;
+        socky->type = SOCKY_LISTENER;
     } else {
-        socky->state = SOCKY_DUPLEX;
+        socky->state = SOCKY_CONNECTED;
+        socky->type = SOCKY_DUPLEX;
     }
     return 0;
 }
