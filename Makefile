@@ -45,8 +45,10 @@ CFLAGS		+= -Wall -Wextra -fPIC -pedantic
 CPPFLAGS	+= -I ./include
 LDFLAGS		= -shared
 
-GREEN		= '\033[0;32m'
-NO_COLOR	= '\033[0m'
+GREEN=`tput setaf 2`
+RED=`tput setaf 1`
+YELLOW=`tput setaf 3`
+NO_COLOR=`tput sgr0`
 
 %.o : %.c
 	@$ $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
@@ -97,7 +99,7 @@ install: re
 	@cp $(NAME) /usr/lib/$(NAME) 2> /dev/null || \
 	printf "\033[1m\033[31mError : try sudo make install\033[0m\n" && \
 	cp include/socky.h /usr/include/ 2> /dev/null && \
-	printf "\033[1m\033[32mLibrary successfull installed !\033[0m\n"
+	printf "\033[1m\033[32mLibrary $(NAME) successfully installed !\033[0m\n"
 
 static: $(OBJS)
 	$(ARCHIVER) rc $(NAME:.so=.a) $(OBJS)
