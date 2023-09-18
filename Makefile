@@ -59,28 +59,21 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$ $(CC) $(LDFLAGS) $(OBJS) $(LIBS) -o $@
-	@echo "$(CC) $(LDFLAGS) $(OBJS) $(LIBS) -o $@ \
-	["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
+	@echo "$(CC) $(LDFLAGS) $(OBJS) $(LIBS) -o $@ ["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
 
 tests_run: $(TESTS_OBJS)
 	@echo $(TESTS_OBJS)
 	@$ $(CC) -lcriterion $(TESTS_OBJS) $(LIBS) -o $@
-	@echo "$(CC) -lcriterion $(TESTS_OBJS) $(LIBS) -o $@ \
-	["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
-	./$@
-	@pkill nc || true
-	@pkill $@ || true
+	@echo "$(CC) -lcriterion $(TESTS_OBJS) $(LIBS) -o $@ ["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
+	./$@ || true
 	@$(RM) $@
 	@$(RM) $(TESTS_OBJS)
 
 val_run: CFLAGS += -g3
 val_run: $(TESTS_OBJS)
 	@$ $(CC) -lcriterion $(TESTS_OBJS) $(LIBS) -o $@
-	@echo "$(CC) -lcriterion $(TESTS_OBJS) $(LIBS) -o $@ \
-	["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
-	valgrind --trace-children=yes --quiet ./$@
-	@pkill nc || true
-	@pkill $@ || true
+	@echo "$(CC) -lcriterion $(TESTS_OBJS) $(LIBS) -o $@ ["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
+	valgrind --trace-children=yes --quiet ./$@ || true
 	@$(RM) $@
 	@$(RM) $(TESTS_OBJS)
 
