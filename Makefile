@@ -88,7 +88,7 @@ fclean: clean
 
 re: fclean all
 
-install: re
+install: all
 	@cp $(NAME) /usr/lib/$(NAME) 2> /dev/null || \
 	printf "\033[1m\033[31mError : try sudo make install\033[0m\n" && \
 	cp include/socky.h /usr/include/ 2> /dev/null && \
